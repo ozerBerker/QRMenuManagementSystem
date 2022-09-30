@@ -14,7 +14,6 @@ namespace QRMenuManagementSystem.Controllers
 
         FirebaseConfigConnection connection = new FirebaseConfigConnection();
 
-
         public IActionResult Index()
         {
             connection.client = new FireSharp.FirebaseClient(connection.config);
