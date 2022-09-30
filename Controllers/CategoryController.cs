@@ -36,6 +36,23 @@ namespace QRMenuManagementSystem.Controllers
             return View(list);
         }
 
+        public IActionResult Products(string id)
+        {
+            connection.client = new FireSharp.FirebaseClient(connection.config);
+            FirebaseResponse response = connection.client.Get("Products");
+            dynamic data = JsonConvert.DeserializeObject<dynamic>(response.Body);
+            var list = new List<Product>();
+            if (data != null)
+            {
+                foreach (var item in data)
+                {
+                    list.Add(JsonConvert.DeserializeObject<Product>(((JProperty)item).Value.ToString()));
+                }
+            }
+            list = list.Where(x=>x.CategoryId == id).ToList();
+            return View(list);
+        }
+
         [HttpGet]
         public IActionResult Delete(string id)
         {
