@@ -1,0 +1,56 @@
+﻿@model QRMenuManagementSystem.Areas.Admin.Models.Customer
+
+@{
+    ViewData["Title"] = "AddCategory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>AddCategory</h1>
+
+<h4>Category</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="CustomerName" class="control-label"></label>
+                <input asp-for="CustomerName" class="form-control" />
+                <span asp-validation-for="CustomerName" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="CustomerActive" /> @Html.DisplayNameFor(model => model.CustomerActive)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="CustomerQrCode" class="control-label"></label>
+                <input asp-for="CustomerQrCode" class="form-control" />
+                <span asp-validation-for="CustomerQrCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CustomerAuthApiKey" class="control-label"></label>
+                <input asp-for="CustomerAuthApiKey" class="form-control" />
+                <span asp-validation-for="CustomerAuthApiKey" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CustomerDatabaseSecret" class="control-label"></label>
+                <input asp-for="CustomerDatabaseSecret" class="form-control" />
+                <span asp-validation-for="CustomerDatabaseSecret" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CustomerBasePath" class="control-label"></label>
+                <input asp-for="CustomerBasePath" class="form-control" />
+                <span asp-validation-for="CustomerBasePath" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" asp-controller="Home" asp-area="Admin">Back to List</a>
+</div>
+

@@ -1,0 +1,71 @@
+﻿@model IEnumerable<QRMenuManagementSystem.Areas.Admin.Models.Customer>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create" asp-controller="Home" asp-area="Admin" >Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerQrCode)
+            </th>
+@*            <th>
+                @Html.DisplayNameFor(model => model.CustomerAuthApiKey)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerDatabaseSecret)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerBasePath)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerActive)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerId)
+            </td>                
+            <td>                 
+                @Html.DisplayFor(modelItem => item.CustomerName)
+            </td>                
+            <td>                 
+                @Html.DisplayFor(modelItem => item.CustomerQrCode)
+            </td>                
+@*            <td>                 
+                @Html.DisplayFor(modelItem => item.CustomerAuthApiKey)
+            </td>                
+            <td>                 
+                @Html.DisplayFor(modelItem => item.CustomerDatabaseSecret)
+            </td>                
+            <td>                 
+                @Html.DisplayFor(modelItem => item.CustomerBasePath)
+            </td> *@               
+            <td>                 
+                @Html.DisplayFor(modelItem => item.CustomerActive)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.CustomerId  }) |
+                @Html.ActionLink("Delete", "Delete", new {  id=item.CustomerId  })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

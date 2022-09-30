@@ -13,6 +13,11 @@ namespace QRMenuManagementSystem.Controllers
             _logger = logger;
         }
 
+        public IActionResult Launch()
+        {
+            return RedirectToAction("Index", "Home", new { area = "Admin" });
+        }
+
         public IActionResult Index()
         {
             return View();
