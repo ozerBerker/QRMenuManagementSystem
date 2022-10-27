@@ -3,10 +3,10 @@
 *@
 @{
 }
-<nav id="sidebar">
+<nav id="sidebar" class="gradient-custom-2">
     <div class="sidebar-header">
-        <h3>Bootstrap Sidebar</h3>
-        <strong>BS</strong>
+        <h3>Berker Özer</h3>
+        <strong>BÖ</strong>
     </div>
 
     <ul class="list-unstyled components">
@@ -14,16 +14,16 @@
         <li>
             <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
             <ul class="collapse list-unstyled" id="homeSubmenu">
-                <li><a asp-action="Index" asp-controller="Home">Home 1</a></li>
+                <li><a asp-action="Index" asp-controller="Home" asp-area="">Home 1</a></li>
                 <li><a href="#">Home 2</a></li>
                 <li><a href="#">Home 3</a></li>
             </ul>
         </li>
         <li>
-            <a asp-controller="Category" asp-action="Index">Category</a>
+            <a asp-controller="Category" asp-action="Index" asp-area="">Category</a>
         </li>
         <li>
-            <a asp-controller="Product" asp-action="Index">Product</a>
+            <a asp-controller="Product" asp-action="Index" asp-area="">Product</a>
         </li>
         <li>
             <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Settings</a>
