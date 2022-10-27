@@ -14,6 +14,12 @@
         {
             services.AddControllersWithViews();
             //services.AddMvc();
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromSeconds(10);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
         }
         public void Configure(WebApplication app, IWebHostEnvironment env)
         {
@@ -30,10 +36,9 @@
             app.UseRouting();
 
             app.UseAuthentication();
-
             app.UseAuthorization();
 
-            app.UseCookiePolicy();
+            app.UseSession();
             //app.MapControllerRoute(
             //    name: "default",
             //    pattern: "{controller=Auth}/{action=Index}/{id?}");

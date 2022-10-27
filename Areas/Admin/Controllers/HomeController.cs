@@ -1,4 +1,5 @@
-﻿using FireSharp.Interfaces;
+﻿using Firebase.Auth;
+using FireSharp.Interfaces;
 using FireSharp.Response;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -61,9 +62,12 @@ namespace QRMenuManagementSystem.Areas.Admin.Controllers
             {
                 client = new FireSharp.FirebaseClient(config);
 
+                var LocalId = Convert.ToString(Registation());
                 var data = customer;
+                data.CustomerId = LocalId;
+
                 PushResponse response = await client.PushAsync("Customers/", data);
-                data.CustomerId = response.Result.name;
+                //data.CustomerId = response.Result.name;
                 SetResponse setResponse = client.Set("Customers/" + data.CustomerId, data);
 
                 if (setResponse.StatusCode == System.Net.HttpStatusCode.OK)
@@ -81,7 +85,32 @@ namespace QRMenuManagementSystem.Areas.Admin.Controllers
                 return View();
             }
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Registration", "Account", new LoginModel("test123@test.com", "12345TEST"));
+        }
+
+        public async Task<string> Registation()
+        {
+            FirebaseAuthProvider firebaseAuthProvider = new FirebaseAuthProvider(new FirebaseConfig(new ApiKeys().API_KEY));
+            try
+            {
+                //create the user
+                var firebaseAuthLink = await firebaseAuthProvider.CreateUserWithEmailAndPasswordAsync("test123@test.com", "12345TEST");
+                var LocalId = firebaseAuthLink.User.LocalId;
+                //saving the token in a session variable
+                if (LocalId != null)
+                {
+                    return LocalId;
+                }
+            }
+            catch (FirebaseAuthException ex)
+            {
+                var firebaseEx = JsonConvert.DeserializeObject<FirebaseError>(ex.ResponseData);
+                ModelState.AddModelError(String.Empty, firebaseEx.error.message);
+                return null;
+            }
+
+            return null;
+
         }
 
         // GET: HomeController/Edit/5
