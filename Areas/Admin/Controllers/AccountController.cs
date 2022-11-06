@@ -16,65 +16,12 @@ namespace QRMenuManagementSystem.Areas.Admin.Controllers
 
             if (token != null)
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Storage");
             }
             else
             {
                 return RedirectToAction("SignIn");
             }
-        }
-
-        [HttpPost]
-        public async Task<string> Registration(LoginModel loginModel)
-        {
-            FirebaseAuthProvider firebaseAuthProvider = new FirebaseAuthProvider(new FirebaseConfig(new ApiKeys().API_KEY));
-            try
-            {
-                //create the user
-                var firebaseAuthLink = await firebaseAuthProvider.CreateUserWithEmailAndPasswordAsync(loginModel.Email, loginModel.Password);
-                string token = firebaseAuthLink.User.LocalId;
-
-
-                //saving the token in a session variable
-                if (token != null)
-                {
-                    return token;
-                }
-            }
-            catch (FirebaseAuthException ex)
-            {
-                var firebaseEx = JsonConvert.DeserializeObject<FirebaseError>(ex.ResponseData);
-                ModelState.AddModelError(String.Empty, firebaseEx.error.message);
-                return null;
-            }
-
-            return null;
-
-            //FirebaseAuthProvider firebaseAuthProvider = new FirebaseAuthProvider(new FirebaseConfig(new ApiKeys().API_KEY));
-            //try
-            //{
-            //    //create the user
-            //    await firebaseAuthProvider.CreateUserWithEmailAndPasswordAsync(loginModel.Email, loginModel.Password);
-            //    //log in the new user
-            //    var fbAuthLink = await firebaseAuthProvider
-            //                    .SignInWithEmailAndPasswordAsync(loginModel.Email, loginModel.Password);
-            //    string token = fbAuthLink.FirebaseToken;
-            //    //saving the token in a session variable
-            //    if (token != null)
-            //    {
-            //        HttpContext.Session.SetString("_UserToken", token);
-
-            //        return RedirectToAction("Index", "Home");
-            //    }
-            //}
-            //catch (FirebaseAuthException ex)
-            //{
-            //    var firebaseEx = JsonConvert.DeserializeObject<FirebaseError>(ex.ResponseData);
-            //    ModelState.AddModelError(String.Empty, firebaseEx.error.message);
-            //    return View(loginModel);
-            //}
-
-            //return View();
         }
 
         [AllowAnonymous]

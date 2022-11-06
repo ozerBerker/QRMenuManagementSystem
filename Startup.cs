@@ -1,4 +1,7 @@
-﻿namespace QRMenuManagementSystem
+﻿using FirebaseAdmin;
+using Google.Apis.Auth.OAuth2;
+
+namespace QRMenuManagementSystem
 {
     public class Startup
     {
@@ -12,6 +15,13 @@
         }
         public void ConfigureServices(IServiceCollection services)
         {
+            string path = AppDomain.CurrentDomain.BaseDirectory + @"qrmenumanagementsystem-firebase-adminsdk-1uhkq-5ea6edde49.json";
+            Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
+            FirebaseApp.Create(new AppOptions()
+            {
+                Credential = GoogleCredential.GetApplicationDefault(),
+            });
+
             services.AddControllersWithViews();
             //services.AddMvc();
             services.AddSession(options =>
