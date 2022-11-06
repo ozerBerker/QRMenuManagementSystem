@@ -15,7 +15,7 @@ namespace QRMenuManagementSystem.Controllers
 
         public IActionResult Launch()
         {
-            return RedirectToAction("Index", "Home", new { area = "Admin" });
+            return RedirectToAction("Index", "Account", new { area = "Admin" });
         }
 
         public IActionResult Index()
